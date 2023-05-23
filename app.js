@@ -31,5 +31,10 @@ app.listen(port, (err) => {
   }
 });
 
-app.post("/api/movies", movieHandlers.postMovie);
-app.post("/api/users", userHandlers.postUser);
+const { validateMovie } = require("./validators.js");
+const { validateUser } = require("./validators.js");
+
+app.post("/api/movies", validateMovie, movieHandlers.postMovie);
+app.post("/api/users", validateUser, userHandlers.postUser);
+app.put("/api/movies/:id", validateMovie, movieHandlers.updateMovie);
+app.put("/api/users/:id", validateUser, userHandlers.updateUser);
