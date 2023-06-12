@@ -33,12 +33,13 @@ app.listen(port, (err) => {
 
 const { validateMovie } = require("./validators.js");
 const { validateUser } = require("./validators.js");
+const { hashPassword } = require("./auth.js");
 
 app.post("/api/movies", validateMovie, movieHandlers.postMovie);
-app.post("/api/users", validateUser, userHandlers.postUser);
+app.post("/api/users", validateUser, hashPassword, userHandlers.postUser);
 
 app.put("/api/movies/:id", validateMovie, movieHandlers.updateMovie);
-app.put("/api/users/:id", validateUser, userHandlers.updateUser);
+app.put("/api/users/:id", validateUser, hashPassword, userHandlers.updateUser);
 
 app.delete("/api/movies/:id", movieHandlers.deleteMovie);
 app.delete("/api/users/:id", userHandlers.deleteUser);
