@@ -2,7 +2,7 @@ const database = require("./database");
 
 const getUsers = (req, res) => {
   const initialSql =
-    "select id, firstname, lastname, email, city, language from users";
+    "select firstname, lastname, email, city, language from users";
   const where = [];
 
   if (req.query.language != null) {
